@@ -45,11 +45,10 @@ public class ProfessionalController {
   @Produces("application/json")
   public Response getAllProfessionals() {
     List<Professional> professionals = service.getAllProfessionals();
-    if (professionals.isEmpty()) {
+    if (professionals.isEmpty() || professionals == null) {
       ApplicationError applicationError =
           new ApplicationError(Response.Status.NOT_FOUND, "Nenhum registro foi encontrado!");
-      return Response.status(applicationError.getStatus()).entity(applicationError.getMessage())
-          .build();
+      return Response.status(applicationError.getStatus()).entity(applicationError).build();
     }
     return Response.ok(professionals).build();
   }
@@ -64,7 +63,7 @@ public class ProfessionalController {
     if (professional.getId() != null && professional.getId() != 0) {
       ApplicationError error = new ApplicationError(Response.Status.BAD_REQUEST,
           "Não é permitido inserir novos registros com ID explícito");
-      return Response.status(error.getStatus()).entity(error.getMessage()).build();
+      return Response.status(error.getStatus()).entity(error).build();
     }
     this.service.addProfessional(professional);
     return Response.status(201).entity("Inserido").build();
