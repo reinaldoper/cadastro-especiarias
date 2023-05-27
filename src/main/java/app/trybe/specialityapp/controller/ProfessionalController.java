@@ -64,7 +64,7 @@ public class ProfessionalController {
     if (professional.getId() != null && professional.getId() != 0) {
       ApplicationError error = new ApplicationError(Response.Status.BAD_REQUEST,
           "Não é permitido inserir novos registros com ID explícito");
-      return Response.status(error.getStatus()).entity(error).build();
+      return Response.status(error.getStatus()).entity(error.getMessage()).build();
     }
     this.service.addProfessional(professional);
     return Response.status(201).entity("Inserido").build();
