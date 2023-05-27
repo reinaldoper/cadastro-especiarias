@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class Professional {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
   private String name;
   private String speciality;

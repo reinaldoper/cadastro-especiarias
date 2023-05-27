@@ -1,14 +1,15 @@
 package app.trybe.specialityapp.commons;
 
 import javax.ws.rs.core.Response.Status;
+import org.springframework.http.HttpStatus;
 
 public class ApplicationError {
 
   private Status status;
   private String message;
 
-  public ApplicationError(Status status, String message) {
-    this.status = status;
+  public ApplicationError(Status notFound, String message) {
+    this.status = notFound;
     this.message = message;
   }
 

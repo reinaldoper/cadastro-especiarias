@@ -20,7 +20,26 @@ public class ProfessionalService {
   /**
    * Método classe.
    */
+
+  public ProfessionalService(ProfessionalRepository professionalRepository) {
+    this.repository = professionalRepository;
+  }
+
+  /**
+   * Método classe.
+   */
+
   public List<Professional> getAllProfessionals() {
-    return repository.findAll();
+    List<Professional> professionals = this.repository.findAll();
+    return professionals;
+  }
+
+  /**
+   * Método classe.
+   */
+
+
+  public void addProfessional(Professional professional) {
+    this.repository.save(professional);
   }
 }
