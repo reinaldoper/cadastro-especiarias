@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
@@ -54,8 +55,7 @@ public class ProfessionalController {
     if (professionals.isEmpty() || professionals == null) {
       ApplicationError applicationError =
           new ApplicationError(Response.Status.NOT_FOUND, "Nenhum registro foi encontrado!");
-      return Response.status(applicationError.getStatus()).entity(applicationError.getMessage())
-          .build();
+      return Response.status(applicationError.getStatus()).entity(applicationError).build();
     }
     return Response.ok(professionals).build();
   }
@@ -83,7 +83,6 @@ public class ProfessionalController {
 
   @PUT
   @Path("/edit/{id}")
-  @Consumes("application/json")
   @Produces("application/json")
   public Response update(@PathParam("id") Integer id, @RequestBody Professional professional) {
     try {
@@ -100,9 +99,8 @@ public class ProfessionalController {
    * Método classe.
    */
 
-  @PUT
-  @Path("/edit/{id}")
-  @Consumes("application/json")
+  @DELETE
+  @Path("delete/{id}")
   @Produces("application/json")
   public Response remove(@PathParam("id") Integer id) {
     try {
