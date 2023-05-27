@@ -45,10 +45,11 @@ public class ProfessionalController {
   @Produces("application/json")
   public Response getAllProfessionals() {
     List<Professional> professionals = service.getAllProfessionals();
-    if (professionals.isEmpty() || professionals == null) {
+    if (professionals.isEmpty() || professionals.size() == 0) {
       ApplicationError applicationError =
           new ApplicationError(Response.Status.NOT_FOUND, "Nenhum registro foi encontrado!");
-      return Response.status(applicationError.getStatus()).entity(applicationError).build();
+      return Response.status(applicationError.getStatus()).entity(applicationError.getMessage())
+          .build();
     }
     return Response.ok(professionals).build();
   }
